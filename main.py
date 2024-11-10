@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from groq import Groq
-from concurrent.futures import ThreadPoolExecutor
 import plotly.graph_objects as go
 import plotly.express as px
 from wordcloud import WordCloud, STOPWORDS
@@ -18,10 +17,7 @@ client = Groq(api_key=groqapi_key)
 # Models
 model = "llama3-70b-8192"
 
-#"llama3-8b-8192"
-#llama3-70b-8192
-
-# Function to get response from Mistral AI
+# Fuction to get response from LLM
 def get_response(input_text):
 
  
