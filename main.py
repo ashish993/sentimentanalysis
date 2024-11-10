@@ -7,7 +7,7 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
 # Initialize client
-groqapi_key=groqapi
+groqapi_key= st.secrets["groqapi"]
 
 
 client = Groq(api_key=groqapi_key)
