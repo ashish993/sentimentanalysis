@@ -8,46 +8,16 @@ import matplotlib.pyplot as plt
 
 # Initialize client
 groqapi_key= st.secrets["groqapi"]
-
-
 client = Groq(api_key=groqapi_key)
 
-#mistral_client = Mistral(api_key=mistral_api_key)
-
 # Models
-model = "llama3-70b-8192"
+model = "llama3-8b-8192"
 
 # Fuction to get response from LLM
 def get_response(input_text):
 
  
-    prompt = """
-Analyze the following customer support chat conversation or marketing campaign feedback. Break down the conversation into individual sentences, and provide a detailed analysis based on the following aspects:
-
-1. **Sentiment Analysis**: Identify the sentiment of each sentence as positive, negative, or neutral.
-2. **Emotion Detection**: Detect and list the emotions expressed by both the customer and agent in each sentence (e.g., frustration, happiness, confusion, etc.).
-3. **Intent Analysis**: Identify the primary and secondary intents of the customer in each sentence (e.g., seeking a refund, technical help, feedback, etc.).
-4. **Brand Impact**: Analyze the potential impact of each sentence on the brand (e.g., positive, negative, neutral).
-5. **Sensitivity**: Determine the level of sensitivity of each sentence (e.g., low, medium, high).
-6. **Flag Critical Issues**: Flag any critical issues in the conversation such as compliance violations, fraud, security concerns, or any issue that needs immediate escalation.
-
-For each sentence, output the analysis in the following tabular format:
-
-| Sentence                                                                 | Sentiment | Emotion Detection                | Intent                                 | Brand Impact | Sensitivity | Flag Critical Issue |
-|--------------------------------------------------------------------------|-----------|----------------------------------|----------------------------------------|--------------|-------------|----------------------|
-| Sentence 1                                                              | Positive  | Happiness                        | Seeking Information                    | Positive     | Low         | No                   |
-| Sentence 2                                                              | Negative  | Frustration                      | Requesting Refund                      | Negative     | High        | Yes                  |
-| Sentence 3                                                              | Neutral   | Confusion                        | Clarification on Process               | Neutral      | Medium      | No                   |
-| …                                                                        | …         | …                                | …                                      | …            | …           | …                    |
-
-Make sure to:
-- Treat each line as a separate sentence for analysis.
-- Highlight important data (e.g., flagged critical issues or high brand impact) within the table.
-- Avoid adding extra commentary; focus on clear, structured output in the table.
-
-Do not include timestamps. do not add any additional notes.
-Review the response below:
- """ + input_text
+    prompt = st.secrets["prompt"] + input_text
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
