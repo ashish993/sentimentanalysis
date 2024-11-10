@@ -1,0 +1,10 @@
+streamlit
+pandas
+groq
+openpyxl
+plotly
+scikit-learn
+nltk
+matplotlib
+seaborn
+ThreadPoolExecutor
